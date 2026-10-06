@@ -1,0 +1,88 @@
+{
+  "name": "happy-days-presenter",
+  "productName": "Happy Days Presenter",
+  "version": "1.3.0",
+  "description": "Run sheets of images, videos and audio for live events, shown on a projector.",
+  "main": "main.js",
+  "author": "Happy Days",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dist:win": "electron-builder --win",
+    "dist:mac": "electron-builder --mac",
+    "dist:linux": "electron-builder --linux"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.happydays.presenter",
+    "productName": "Happy Days Presenter",
+    "files": [
+      "main.js",
+      "preload.js",
+      "app/**/*",
+      "build/icon.png",
+      "build/icon.ico",
+      "node_modules/ffmpeg-static/**"
+    ],
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico",
+      "legalTrademarks": "Happy Days"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "shortcutName": "Happy Days Presenter",
+      "artifactName": "Happy-Days-Presenter-Setup-${version}.${ext}",
+      "multiLanguageInstaller": true,
+      "installerLanguages": [
+        "en_US",
+        "de_DE",
+        "ar_SA",
+        "tr_TR"
+      ],
+      "displayLanguageSelector": false
+    },
+    "portable": {
+      "artifactName": "Happy-Days-Presenter-Portable-${version}.${ext}"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "build/icon.png",
+      "category": "public.app-category.productivity"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "build/icon.png",
+      "category": "AudioVideo"
+    },
+    "asarUnpack": [
+      "node_modules/ffmpeg-static/**"
+    ]
+  },
+  "dependencies": {
+    "ffmpeg-static": "^5.2.0"
+  }
+}
